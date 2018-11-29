@@ -20,7 +20,7 @@ describe('concat', () => {
     }
     assert.deepEqual(collect(concat(one(), two())), [1, 2])
   })
-  it('concatenates mixed iterables', async () => {
+  it('concatenates mixed sync and async iterables', async () => {
     function* one() {
       yield 1
     }

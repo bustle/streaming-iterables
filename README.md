@@ -143,7 +143,7 @@ function concat(...iterables: Array<Iterable<any>>): IterableIterator<any>
 function concat(...iterables: Array<AnyIterable<any>>): AsyncIterableIterator<any>
 ```
 
-Combine multiple iterators into a single iterable. Reads each iterable completely one at a time. Returns a sync iterator if all `iterables` are sync otherwise an async iterable.
+Combine multiple iterators into a single iterable. Reads each iterable completely one at a time. Returns a sync iterator if all `iterables` are sync, otherwise it returns an async iterable.
 
 ```ts
 import { concat } from 'streaming-iterables'
@@ -413,14 +413,14 @@ Reduces an iterable to a value which is the accumulated result of running each v
 function take<T>(count: number, iterable: AnyIterable<T>): AsyncIterableIterator<T>
 ```
 
-Return a new iterator that reads a specific number of items from `iterable`.
+Returns a new iterator that reads a specific number of items from `iterable`.
 
 ### tap
 ```ts
 function tap<T>(func: (data: T) => any, iterable: AnyIterable<T>): AsyncIterableIterator<T>
 ```
 
-Return a new iterator that yields the data it consumes passing the data through to a function. If you provide an async function the iterator will wait for the promise to resolve before yielding the value. This is useful for logging, or processing information and passing it along.
+Returns a new iterator that yields the data it consumes passing the data through to a function. If you provide an async function the iterator will wait for the promise to resolve before yielding the value. This is useful for logging, or processing information and passing it along.
 
 ### transform
 ```ts

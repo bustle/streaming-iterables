@@ -125,7 +125,7 @@ describe('flatTransform', () => {
     }
     assert.deepEqual(values, [1, 2, 3])
   })
-  it('yields all values from a returned sync iterables right away and async iterables in parallel', async () => {
+  it('yields all values from a returned sync iterable right away and async iterable in parallel', async () => {
     const valuesToReturn = [asyncFromArray([1, 2, 3]), [4, 5, 6], asyncFromArray([7, 8, 9])]
     const transformFunc = () => valuesToReturn.shift()
     const threeItems = [1, 2, 3]

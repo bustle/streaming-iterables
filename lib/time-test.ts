@@ -2,7 +2,7 @@ import { assert } from 'chai'
 import { time } from './'
 import { collect } from './collect'
 
-describe.only('tap', () => {
+describe('time', () => {
   it('produces an iterator for an iterator', () => {
     const values = [1, 2, 3, 4]
     const timer = time()

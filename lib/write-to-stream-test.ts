@@ -1,6 +1,6 @@
 import { assert } from 'chai'
 import { writeToStream } from './'
-import { PassThrough, Transform } from 'stream'
+import { PassThrough, Transform, Writable } from 'stream'
 import { promiseImmediate } from './util-test'
 
 describe('writeToStream', () => {
@@ -59,5 +59,23 @@ describe('writeToStream', () => {
     const stream = new PassThrough({ highWaterMark: 4, objectMode: true })
     stream.resume()
     await writeToStream(stream, values)
+  })
+  it('rejects on stream errors', async () => {
+    const values = [1, 2, 3, 4]
+    const stream = new Writable({
+      highWaterMark: 0,
+      objectMode: true,
+      write(chunk, encoding, cb) {
+        setImmediate(() => cb(new Error('Stream error')))
+      },
+    })
+
+    try {
+      await writeToStream(stream, values)
+    } catch (e) {
+      assert.equal(e.message, 'Stream error')
+      return
+    }
+    throw new Error('No error caught')
   })
 })

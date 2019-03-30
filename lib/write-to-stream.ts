@@ -2,7 +2,7 @@
 import { AnyIterable } from './types'
 
 interface IWritable {
-  off: any
+  removeListener: any
   once: any
   write: any
 }
@@ -30,7 +30,7 @@ async function _writeToStream(stream: IWritable, iterable: AnyIterable<any>) {
     }
   }
 
-  stream.off('error', errorHandler)
+  stream.removeListener('error', errorHandler)
 }
 
 export function writeToStream(stream: IWritable): (iterable: AnyIterable<any>) => Promise<void>

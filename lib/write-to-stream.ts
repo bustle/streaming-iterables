@@ -14,23 +14,21 @@ function waitForDrain(stream: IWritable) {
 }
 
 async function _writeToStream(stream: IWritable, iterable: AnyIterable<any>) {
-  let error: Error | undefined
-  function errorHandler(err: Error) {
-    error = err
-  }
-  stream.once('error', errorHandler)
+  let errorListener
+  const errorPromise = new Promise((resolve, reject) => {
+    errorListener = reject
+    stream.once('error', reject)
+  })
 
   for await (const value of iterable) {
-    if (error) {
-      throw error
-    }
-
+    await Promise.race([errorPromise, Promise.resolve()])
     if (stream.write(value) === false) {
-      await waitForDrain(stream)
+      await Promise.race([errorPromise, waitForDrain(stream)])
     }
   }
 
-  stream.removeListener('error', errorHandler)
+  stream.removeListener('error', errorListener)
+  await Promise.race([errorPromise, Promise.resolve()])
 }
 
 export function writeToStream(stream: IWritable): (iterable: AnyIterable<any>) => Promise<void>

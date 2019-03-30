@@ -497,7 +497,7 @@ for await (page of download(urls)) {
 function writeToStream(stream: Writable, iterable: AnyIterable<any>): Promise<void>
 ```
 
-Writes the `iterable` to the stream respecting the stream backpressure. Resolves when the iterable is exhausted.
+Writes the `iterable` to the stream respecting the stream backpressure. Resolves when the iterable is exhausted. Rejects and stops reading from the iterable when the stream emits an error.
 
 
 ```ts

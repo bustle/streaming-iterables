@@ -2,14 +2,14 @@
 import { AnyIterable } from './types'
 
 interface IWritable {
-  removeListener: any
   once: any
   write: any
+  removeListener: any
 }
 
-function waitForDrain(stream: IWritable) {
+function once(event: string, stream: IWritable): Promise<any> {
   return new Promise(resolve => {
-    stream.once('drain', resolve)
+    stream.once(event, resolve)
   })
 }
 
@@ -23,7 +23,7 @@ async function _writeToStream(stream: IWritable, iterable: AnyIterable<any>) {
   for await (const value of iterable) {
     await Promise.race([errorPromise, Promise.resolve()])
     if (stream.write(value) === false) {
-      await Promise.race([errorPromise, waitForDrain(stream)])
+      await Promise.race([errorPromise, once('drain', stream)])
     }
   }
 

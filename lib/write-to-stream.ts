@@ -2,7 +2,7 @@
 import { AnyIterable } from './types'
 
 interface IWritable {
-  off: any,
+  off: any
   once: any
   write: any
 }
@@ -14,9 +14,9 @@ function waitForDrain(stream: IWritable) {
 }
 
 async function _writeToStream(stream: IWritable, iterable: AnyIterable<any>) {
-  let error: Error | undefined;
+  let error: Error | undefined
   function errorHandler(err: Error) {
-    error = err;
+    error = err
   }
   stream.once('error', errorHandler)
 

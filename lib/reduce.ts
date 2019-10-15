@@ -1,4 +1,4 @@
-/// <reference lib="esnext.asynciterable" />
+/// <reference lib="es2018.asynciterable" />
 import { AnyIterable } from './types'
 export async function _reduce<T, B>(func: (acc: B, value: T) => B, start: B, iterable: AnyIterable<T>) {
   let value = start

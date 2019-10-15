@@ -1,4 +1,4 @@
-/// <reference lib="esnext.asynciterable" />
+/// <reference lib="es2018.asynciterable" />
 import { AnyIterable, FlatMapValue } from './types'
 import { flatten } from './flatten'
 import { filter } from './filter'

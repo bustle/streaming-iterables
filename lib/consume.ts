@@ -1,4 +1,4 @@
-/// <reference lib="esnext.asynciterable" />
+/// <reference lib="es2018.asynciterable" />
 import { AnyIterable } from './types'
 export async function _consume<T>(iterable: AnyIterable<T>) {
   for await (const val of iterable) {

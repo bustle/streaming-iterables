@@ -1,4 +1,4 @@
-/// <reference lib="esnext.asynciterable" />
+/// <reference lib="es2018.asynciterable" />
 
 if ((Symbol as any).asyncIterator === undefined) {
   ;(Symbol as any).asyncIterator = Symbol.for('asyncIterator')
